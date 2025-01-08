@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T20 Score Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="isolate bg-white px-6 py-12 sm:py-16 lg:px-8">
+  <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
+    <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+  </div>
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">T20 Score Predictor</h2>
+    <p class="mt-2 text-lg/8 text-gray-600">Works after 5 overs</p>
+  </div>
+  <form action="/predict" method="POST" class="mx-auto mt-12 max-w-xl sm:mt-12">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+      <!-- Batting Team -->
+      <div>
+        <label for="batting_team" class="block text-sm/6 font-semibold text-gray-900">Select Batting Team</label>
+        <div class="mt-2.5">
+          <select id="batting_team" name="batting_team" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <option value="" disabled selected>Select team</option>
+            <script>
+              const teams = ['Australia', 'India', 'Bangladesh', 'New Zealand', 'South Africa', 'England', 'West Indies', 'Afghanistan', 'Pakistan', 'Sri Lanka'];
+              teams.forEach(team => {
+                document.write(`<option value="${team}">${team}</option>`);
+              });
+            </script>
+          </select>
+        </div>
+      </div>
+
+      <!-- Bowling Team -->
+      <div>
+        <label for="bowling_team" class="block text-sm/6 font-semibold text-gray-900">Select Bowling Team</label>
+        <div class="mt-2.5">
+          <select id="bowling_team" name="bowling_team" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <option value="" disabled selected>Select team</option>
+            <script>
+              teams.forEach(team => {
+                document.write(`<option value="${team}">${team}</option>`);
+              });
+            </script>
+          </select>
+        </div>
+      </div>
+
+      <!-- City -->
+      <div class="sm:col-span-2">
+        <label for="city" class="block text-sm/6 font-semibold text-gray-900">Select City</label>
+        <div class="mt-2.5">
+          <select id="city" name="city" class="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+            <option value="" disabled selected>Select city</option>
+            <script>
+              const cities = ['Colombo', 'Mirpur', 'Johannesburg', 'Dubai', 'Auckland', 'Cape Town', 'London', 'Pallekele', 'Barbados', 'Sydney', 'Melbourne', 'Durban', 'St Lucia', 'Wellington', 'Lauderhill', 'Hamilton', 'Centurion', 'Manchester', 'Abu Dhabi', 'Mumbai', 'Nottingham', 'Southampton', 'Mount Maunganui', 'Chittagong', 'Kolkata', 'Lahore', 'Delhi', 'Nagpur', 'Chandigarh', 'Adelaide', 'Bangalore', 'St Kitts', 'Cardiff', 'Christchurch', 'Trinidad'];
+              cities.forEach(city => {
+                document.write(`<option value="${city}">${city}</option>`);
+              });
+            </script>
+          </select>
+        </div>
+      </div>
+
+      <!-- Current Score -->
+      <div>
+        <label for="current_score" class="block text-sm/6 font-semibold text-gray-900">Current Score</label>
+        <input type="number" id="current_score" name="current_score" min="0" step="1" class="mt-2.5 block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+      </div>
+
+      <!-- Overs -->
+      <div>
+        <label for="overs" class="block text-sm/6 font-semibold text-gray-900">Overs Done</label>
+        <input type="number" id="overs" name="overs" step="1" min="5" max="20" class="mt-2.5 block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+      </div>
+
+      <!-- Wickets -->
+      <div>
+        <label for="wickets" class="block text-sm/6 font-semibold text-gray-900">Wickets Out</label>
+        <input type="number" id="wickets" name="wickets" min="0" max="10" step="1" class="mt-2.5 block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+      </div>
+
+      <!-- Last Five Overs -->
+      <div>
+        <label for="last_five" class="block text-sm/6 font-semibold text-gray-900">Runs Scored in Last 5 Overs</label>
+        <input type="number" id="last_five" name="last_five" min="0" step="1" class="mt-2.5 block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" required>
+      </div>
+    </div>
+    <div class="mt-10">
+      <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Predict Score</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gradient Blob Effect */
+    .gradient-blob {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      border-radius: 50%;
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      transform: translate(-50%, -50%);
+      filter: blur(30px);
+      z-index: -1;
+      animation: blob 5s infinite ease-in-out;
+    }
+
+    @keyframes blob {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 font-sans text-gray-800">
+
+  <!-- Gradient Blob -->
+  <div class="gradient-blob"></div>
+
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
+      <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Prediction Result</h1>
+
+      <p class="text-center text-xl text-gray-800">
+        The predicted score for the selected match is:
+      </p>
+
+      <div class="text-center mt-4">
+        <h2 class="text-4xl font-bold text-blue-500">{{ predicted_score }}</h2>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="/" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Go Back
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

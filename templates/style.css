@@ -1,0 +1,24 @@
+/* Custom styling for select input with custom arrow */
+.select-custom {
+  padding-right: 2.5rem; /* Adjust based on your design */
+  background-color: #2d3748; /* Dark background for select */
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  color: #e2e8f0;
+  border: 1px solid #4a5568; /* Border styling */
+  appearance: none; /* Removes the default dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative; /* To position the custom arrow */
+}
+
+.select-custom::after {
+  content: '▼'; /* Custom down arrow */
+  position: absolute;
+  top: 50%;
+  right: 0.75rem; /* Position arrow inside the select box */
+  transform: translateY(-50%); /* Center the arrow vertically */
+  font-size: 1rem;
+  color: #e2e8f0;
+  pointer-events: none; /* Prevent the arrow from interfering with click events */
+}
