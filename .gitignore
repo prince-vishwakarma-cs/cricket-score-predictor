@@ -1,0 +1,17 @@
+# Ignore IDE settings
+.idea/
+
+# Ignore virtual environments
+.venv/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore deployment-specific folders
+.vercel/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
